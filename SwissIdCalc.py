@@ -49,6 +49,39 @@ def getCheckDigit(str_numbers):
 
     return str(sum_of_last_digits)[-1]
 
+def getCheckDigitPassport(str_numbers):
+    numbers = []
 
-print("IDCHE" + id_number + "<" + getCheckDigit(id_number))
-print(birth + getCheckDigit(birth) + "M/F" + expiry + getCheckDigit(expiry) + "CHE<<<<<<<" + getCheckDigit(birth + getCheckDigit(birth) + expiry + getCheckDigit(expiry)))
+    for str_char in str_numbers:
+        if str_char.isalpha():
+            int_char = string.ascii_lowercase.index(str_char.lower()) + 10
+        else:
+            int_char = int(str_char)
+
+        numbers.append(int_char)
+
+    mulit_list = [7, 3, 1]
+    product_list = []
+
+    counter = 0
+    for number in numbers:
+        product_list.append(number * mulit_list[counter])
+        counter = counter + 1
+        if counter == 3:
+            counter = 0
+
+    sum_digits = sum(product_list)
+
+    print("sum:" + str(sum_digits))
+
+    return str(sum_digits%10)
+
+
+print("IDCHE" + id_number + "<" + getCheckDigit(id_number) + "<<<<<<<<<<<<<<<<<")
+print(birth + getCheckDigit(birth) + " M/F " + expiry + getCheckDigit(expiry) + "CHE<<<<<<<<<<<" + getCheckDigit(birth + getCheckDigit(birth) + expiry + getCheckDigit(expiry)))
+print("MUSTERMANN<<MAX<<<<<<<<<<<<<<<<<<")
+
+print("------------------------------------")
+
+print("pass:" + getCheckDigitPassport(id_number + getCheckDigitPassport(id_number) + birth + getCheckDigitPassport(birth) + expiry + getCheckDigitPassport(expiry)))
+print(id_number + "<" + getCheckDigitPassport(id_number) + "UTO" + birth + getCheckDigitPassport(birth) + "M/F" + expiry + getCheckDigitPassport(expiry) + "<<<<<<<" + getCheckDigitPassport(id_number + getCheckDigitPassport(id_number) + birth + getCheckDigitPassport(birth) + expiry + getCheckDigitPassport(expiry)))
